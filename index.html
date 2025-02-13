@@ -25,6 +25,10 @@
 <script>
   "use strict";
 
+  const notHack = (value) => {
+    return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+  }
+
   const comments = [
     {
       name: "Глеб Фокин",
@@ -68,8 +72,18 @@
 
     const likeButtons = document.querySelectorAll(".like-button");
 
+    const commentsElements = document.querySelectorAll(".comment");
+
+    for (const commentElement of commentsElements) {
+      commentElement.addEventListener("click", () => {
+        const currenntComment = comments[commentElement.dataset.index];
+        textInput.value = `${currenntComment.name} : ${currenntComment.text}`
+      })
+    }
+
     likeButtons.forEach((likeButton) => {
-      likeButton.addEventListener("click", () => {
+      likeButton.addEventListener("click", (event) => {
+        event.stopPropagation();
         const index = likeButton.dataset.index;
         const comment = comments[index];
 
@@ -99,9 +113,9 @@
     }
 
     const newComment = {
-      name: nameInput.value,
+      name: notHack(nameInput.value),
       date: new Date(),
-      text: textInput.value,
+      text: notHack(textInput.value),
       likes: 0,
       getLiked: false,
     };
