@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/KLim098/Advanced-JavaScript/issues"
   },
-  "homepage": "https://github.com/KLim098/Advanced-JavaScript#readme"
+  "homepage": "https://github.com/KLim098/Advanced-JavaScript#readme",
+  "dependencies": {
+    "date-fns": "^4.1.0"
+  }
 }
